@@ -8,6 +8,7 @@ import { history } from '../store';
 
 import Root from './renderers/root';
 import NotFound from './renderers/not-found';
+import Chat from './renderers/chat';
 
 function Routing() {
   return (
@@ -15,6 +16,7 @@ function Routing() {
       <>
         <Switch>
           <Route exact path="/" component={Root} />
+          <Route exact path="/chat" component={Chat} />
           <Route path="*" component={NotFound} />
         </Switch>
       </>
