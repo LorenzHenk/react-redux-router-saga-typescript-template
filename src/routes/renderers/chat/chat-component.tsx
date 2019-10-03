@@ -4,23 +4,19 @@ import ChatHistory from './chat-history';
 
 import ChatInput from './chat-input';
 
-import { MapDispatchToProps, MapStateToProps } from './chat-redux';
-
-import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useStyles } from './chat-styles';
 
-interface OwnProps {}
+interface OwnProps {
+  loggedIn: boolean;
+}
 
-type Props = OwnProps &
-  RouteComponentProps &
-  MapStateToProps &
-  MapDispatchToProps;
+type Props = OwnProps;
 
-export const ChatComponent: React.FC<Props> = ({ user }) => {
+export const ChatComponent: React.FC<Props> = React.memo(({ loggedIn }) => {
   const classes = useStyles();
 
-  if (!user) {
+  if (!loggedIn) {
     // you need to be logged in to chat
     return (
       <div>
@@ -34,6 +30,6 @@ export const ChatComponent: React.FC<Props> = ({ user }) => {
       <ChatInput />
     </div>
   );
-};
+});
 
 export default ChatComponent;

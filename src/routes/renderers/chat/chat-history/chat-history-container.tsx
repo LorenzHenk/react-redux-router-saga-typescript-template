@@ -1,23 +1,18 @@
 import React from 'react';
 
-import { MapDispatchToProps, MapStateToProps } from './chat-history-redux';
+import { useSelector } from 'react-redux';
 
 import ChatHistoryComponent from './chat-history-component';
+import { getMessagesWithUser } from '../../../../store/chat/selectors';
 
 interface OwnProps {}
 
-type Props = OwnProps & MapStateToProps & MapDispatchToProps;
+type Props = OwnProps;
 
-const ChatHistoryContainer: React.FC<Props> = ({
-  user,
-  chat: { messages },
-}) => {
-  const formattedMessages = messages.map(message => ({
-    ...message,
-    isLeft: message.user !== user,
-  }));
+const ChatHistoryContainer: React.FC<Props> = () => {
+  const messages = useSelector(getMessagesWithUser);
 
-  return <ChatHistoryComponent messages={formattedMessages} />;
+  return <ChatHistoryComponent messages={messages} />;
 };
 
 export default ChatHistoryContainer;

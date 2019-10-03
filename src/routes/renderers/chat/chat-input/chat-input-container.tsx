@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
-
-import { MapDispatchToProps, MapStateToProps } from './chat-input-redux';
+import React, { useState, useCallback } from 'react';
 
 import ChatInputComponent from './chat-input-component';
 
+import { getUserName } from '../../../../store/system/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { sendMessage } from '../../../../store/chat/actions';
+
 interface OwnProps {}
 
-type Props = OwnProps & MapStateToProps & MapDispatchToProps;
+type Props = OwnProps;
 
-const ChatInputContainer: React.FC<Props> = ({ sendMessage, user }) => {
+const ChatInputContainer: React.FC<Props> = React.memo(() => {
   const [message, setMessage] = useState<string>('');
+  const userName = useSelector(getUserName);
 
-  const onSubmit = () => {
-    sendMessage({ timestamp: new Date().getTime(), message, user: user.name });
+  const dispatch = useDispatch();
+
+  const onSubmit = useCallback(() => {
+    dispatch(
+      sendMessage({
+        timestamp: new Date().getTime(),
+        message,
+        user: userName!,
+      }),
+    );
     setMessage('');
-  };
+  }, [dispatch, message, setMessage, userName]);
+
+  if (userName === undefined) {
+    return null;
+  }
 
   return (
     <ChatInputComponent
@@ -23,6 +38,6 @@ const ChatInputContainer: React.FC<Props> = ({ sendMessage, user }) => {
       handleSubmit={onSubmit}
     />
   );
-};
+});
 
 export default ChatInputContainer;

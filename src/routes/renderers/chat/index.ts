@@ -1,5 +1,3 @@
-import Component from './chat-component';
+import Component from './chat-container';
 
-import connect from './chat-redux';
-
-export default connect(Component);
+export default Component;

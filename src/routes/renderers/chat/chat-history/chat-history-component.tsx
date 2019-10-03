@@ -1,16 +1,12 @@
 import React from 'react';
 
-import { Message } from '../../../../store/chat/types';
-
 import ChatMessage from './chat-message';
 import { useStyles } from './chat-history-styles';
 
-export interface FormattedMessage extends Message {
-  isLeft: boolean;
-}
+import { MessagesWithUser } from '../../../../store/chat/selectors';
 
 interface OwnProps {
-  messages: FormattedMessage[];
+  messages: MessagesWithUser;
 }
 
 type Props = OwnProps;

@@ -12,41 +12,39 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-export const ChatInputComponent: React.FC<Props> = ({
-  message,
-  handleInput,
-  handleSubmit,
-}) => {
-  const classes = useStyles();
+export const ChatInputComponent: React.FC<Props> = React.memo(
+  ({ message, handleInput, handleSubmit }) => {
+    const classes = useStyles();
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    handleInput(evt.target.value);
-  };
+    const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+      handleInput(evt.target.value);
+    };
 
-  const handleKeyPress = (evt: React.KeyboardEvent<HTMLInputElement>) => {
-    if (evt.key === 'Enter') {
-      handleSubmit();
-    }
-  };
+    const handleKeyPress = (evt: React.KeyboardEvent<HTMLInputElement>) => {
+      if (evt.key === 'Enter') {
+        handleSubmit();
+      }
+    };
 
-  return (
-    <div className={classes.root}>
-      <TextField
-        onChange={handleChange}
-        value={message}
-        placeholder={'Type in your message'}
-        fullWidth={true}
-        onKeyPress={handleKeyPress}
-      />
-      <Tooltip title="Send" placement="right">
-        <div>
-          <IconButton onClick={handleSubmit} disabled={!message} size="small">
-            <SendIcon />
-          </IconButton>
-        </div>
-      </Tooltip>
-    </div>
-  );
-};
+    return (
+      <div className={classes.root}>
+        <TextField
+          onChange={handleChange}
+          value={message}
+          placeholder={'Type in your message'}
+          fullWidth={true}
+          onKeyPress={handleKeyPress}
+        />
+        <Tooltip title="Send" placement="right">
+          <div>
+            <IconButton onClick={handleSubmit} disabled={!message} size="small">
+              <SendIcon />
+            </IconButton>
+          </div>
+        </Tooltip>
+      </div>
+    );
+  },
+);
 
 export default ChatInputComponent;

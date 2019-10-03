@@ -1,18 +1,22 @@
 import React from 'react';
 import { useStyles } from './chat-message-styles';
 
-import { FormattedMessage } from '../chat-history-component';
+import { MessageWithUser } from '../../../../../store/chat/selectors';
 
 interface Props {
-  message: FormattedMessage;
+  message: MessageWithUser;
 }
 
-const ChatMessage: React.FC<Props> = ({
-  message: { message, timestamp, user, isLeft },
+const ChatMessage: React.FC<Props> = React.memo(({
+  message: { message, timestamp, user, isFromCurrentUser },
 }) => {
   const classes = useStyles();
   return (
-    <div className={`${classes.root} ${isLeft ? classes.left : classes.right}`}>
+    <div
+      className={`${classes.root} ${
+        isFromCurrentUser ? classes.right : classes.left
+      }`}
+    >
       <div className={classes.author}>{user}</div>
       <div className={classes.date}>
         {new Date(timestamp).toLocaleTimeString()}
@@ -20,6 +24,6 @@ const ChatMessage: React.FC<Props> = ({
       <div className={classes.message}>{message}</div>
     </div>
   );
-};
+});
 
 export default ChatMessage;
