@@ -16,6 +16,7 @@
 - [File structure](https://medium.com/@Charles_Stover/optimal-file-structure-for-react-applications-f3e35ad0a145)
 - [redux + typescript](https://redux.js.org/recipes/usage-with-typescript)
 - [redux-saga](https://redux-saga.js.org/)
+- [redux with hooks](https://react-redux.js.org/next/api/hooks#recipe-useactions)
 
 ## Available Scripts
 

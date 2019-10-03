@@ -1,5 +1,3 @@
-import Component from './root-component';
+import Component from './root-container';
 
-import connect from './root-redux';
-
-export default connect(Component);
+export default Component;
