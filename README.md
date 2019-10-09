@@ -17,6 +17,7 @@
 - [redux + typescript](https://redux.js.org/recipes/usage-with-typescript)
 - [redux-saga](https://redux-saga.js.org/)
 - [redux with hooks](https://react-redux.js.org/next/api/hooks#recipe-useactions)
+- [redux + reselect](https://blog.brainsandbeards.com/advanced-redux-patterns-selectors-cb9f88381d74)
 
 ## Available Scripts
 

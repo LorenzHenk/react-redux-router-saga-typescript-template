@@ -19,6 +19,8 @@ export function receiveMessage(message: Message) {
   };
 }
 
+export type ReceiveMessageResult = ReturnType<typeof receiveMessage>;
+
 export function deleteMessage(timestamp: number) {
   return {
     type: DELETE_MESSAGE,

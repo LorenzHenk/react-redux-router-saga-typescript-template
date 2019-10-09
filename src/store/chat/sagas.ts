@@ -6,7 +6,7 @@ import { sendMessage, receiveMessage } from './actions';
 // example of what sagas can do
 
 // if message is an url, it fakes a url fetch
-function* fakeFetch(action: ReturnType<typeof sendMessage>) {
+export function* fakeFetchingBot(action: ReturnType<typeof sendMessage>) {
   const message = action.payload.message;
   if (!message.startsWith('http')) {
     return;
@@ -22,7 +22,7 @@ function* fakeFetch(action: ReturnType<typeof sendMessage>) {
 }
 
 // prints the message you sent twice
-function* mirrorBot(action: ReturnType<typeof sendMessage>) {
+export function* mirrorBot(action: ReturnType<typeof sendMessage>) {
   yield delay(2000);
   const message = receiveMessage({
     user: 'MIRRORING BOT',
@@ -33,7 +33,7 @@ function* mirrorBot(action: ReturnType<typeof sendMessage>) {
 }
 
 // tries to evaluate the message
-function* evaluationBot(action: ReturnType<typeof sendMessage>) {
+export function* evaluationBot(action: ReturnType<typeof sendMessage>) {
   const message = action.payload.message;
 
   try {
@@ -59,7 +59,7 @@ function* evaluationBot(action: ReturnType<typeof sendMessage>) {
 }
 
 export const chatSaga = [
-  takeEvery(SEND_MESSAGE, fakeFetch),
+  takeEvery(SEND_MESSAGE, fakeFetchingBot),
   takeEvery(SEND_MESSAGE, mirrorBot),
   takeEvery(SEND_MESSAGE, evaluationBot),
 ];
